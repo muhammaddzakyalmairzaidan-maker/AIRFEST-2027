@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRFEST — Konsep Event: Abad Pertengahan & Masa Revolusi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel Decorative, Cinzel, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0C0B',
+                        charcoal: '#1A1715',
+                        bronze: '#66462C',
+                        taupe: '#9A8675',
+                        gold: '#D4A843',
+                        brass: '#B5892E',
+                        crimson: '#9E1B24',
+                        flame: '#F04E23',
+                        parchment: '#F5EFE6',
+                        steel: '#A8B2B8'
+                    },
+                    fontFamily: {
+                        display: ['"Cinzel Decorative"', 'serif'],
+                        medieval: ['"Cinzel"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --obsidian: #0D0C0B;
+            --charcoal: #1A1715;
+            --bronze: #66462C;
+            --taupe: #9A8675;
+            --gold: #D4A843;
+            --brass: #B5892E;
+            --crimson: #9E1B24;
+            --flame: #F04E23;
+            --parchment: #F5EFE6;
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: var(--parchment);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0D0C0B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #66462C, #D4A843);
+            border-radius: 9999px;
+        }
+
+        /* Background Subtle Grid & Vignette */
+        .bg-royal-pattern {
+            background-image: 
+                radial-gradient(circle at 50% 15%, rgba(212, 168, 67, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(158, 27, 36, 0.12) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(13, 12, 11, 0.92), rgba(26, 23, 21, 0.98)),
+                repeating-linear-gradient(45deg, rgba(154, 134, 117, 0.03) 0px, rgba(154, 134, 117, 0.03) 1px, transparent 1px, transparent 24px);
+        }
+
+        /* Gold Metallic Text Gradient */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFF3D1 0%, #D4A843 45%, #9A8675 75%, #F04E23 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-ember-gradient {
+            background: linear-gradient(135deg, #FFD166 0%, #F04E23 55%, #9E1B24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Ornate Medieval Card Border */
+        .medieval-card {
+            background: linear-gradient(160deg, rgba(26, 23, 21, 0.92) 0%, rgba(13, 12, 11, 0.96) 100%);
+            border: 1px solid rgba(154, 134, 117, 0.25);
+            box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(212, 168, 67, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .medieval-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.5), rgba(102, 70, 44, 0.1), rgba(240, 78, 35, 0.4));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .medieval-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(212, 168, 67, 0.55);
+            box-shadow: 0 20px 40px -12px rgba(212, 168, 67, 0.18), 0 0 25px -5px rgba(240, 78, 35, 0.12);
+        }
+
+        .medieval-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating Mascot & Plume Flame Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 18px rgba(212, 168, 67, 0.35)) drop-shadow(0 0 35px rgba(240, 78, 35, 0.2)); }
+            50% { filter: drop-shadow(0 0 28px rgba(212, 168, 67, 0.65)) drop-shadow(0 0 50px rgba(240, 78, 35, 0.45)); }
+        }
+
+        @keyframes flameFlicker {
+            0%, 100% { transform: scaleY(1) skewX(0deg); }
+            25% { transform: scaleY(1.04) skewX(-2deg); }
+            50% { transform: scaleY(0.97) skewX(1.5deg); }
+            75% { transform: scaleY(1.03) skewX(-1deg); }
+        }
+
+        .animate-float {
+            animation: floatSlow 5.5s ease-in-out infinite;
+        }
+
+        .animate-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        .flame-plume {
+            transform-origin: bottom center;
+            animation: flameFlicker 2.4s ease-in-out infinite;
+        }
+
+        /* Diamond Divider */
+        .diamond-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .diamond-divider::before,
+        .diamond-divider::after {
+            content: '';
+            height: 1px;
+            width: 120px;
+            background: linear-gradient(90deg, transparent, #9A8675, #D4A843, transparent);
+        }
+
+        /* Button Shine Effect */
+        .btn-royal {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+        .btn-royal::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.22);
+            transform: rotate(30deg);
+            transition: all 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .btn-royal:hover::after {
+            left: 130%;
+        }
+
+        /* Canvas Background */
+        #emberCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-royal-pattern selection:bg-gold selection:text-obsidian">
+
+    <!-- Particle Canvas for Floating Embers & Gold Dust -->
+    <canvas id="emberCanvas"></canvas>
+
+    <!-- Reusable SVG Definitions (AIRFEST Geometric Diamond Logo) -->
+    <svg width="0" height="0" class="hidden">
+        <defs>
+            <!-- Gradient for Gold Shield Version -->
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF0C2" />
+                <stop offset="45%" stop-color="#D4A843" />
+                <stop offset="100%" stop-color="#8C621E" />
+            </linearGradient>
+            <linearGradient id="flameGrad" x1="50%" y1="100%" x2="50%" y2="0%">
+                <stop offset="0%" stop-color="#9E1B24" />
+                <stop offset="45%" stop-color="#F04E23" />
+                <stop offset="100%" stop-color="#FFB703" />
+            </linearGradient>
+            <linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#E2E8F0" />
+                <stop offset="50%" stop-color="#94A3B8" />
+                <stop offset="100%" stop-color="#475569" />
+            </linearGradient>
+
+            <!-- Official AIRFEST Geometric Rhombus Emblem (Faithful to Image 2) -->
+            <g id="airfest-logo-mark">
+                <!-- Left Wing: Warm Taupe (#9A8675) -->
+                <path d="M 88 46 L 22 160 L 66 236 L 78 214 L 48 160 L 88 90 L 106 120 L 122 120 C 127 120 130 113 127 107 Z" fill="var(--logo-left, #9A8675)" />
+                <!-- Right Wing: Antique Bronze (#66462C) -->
+                <path d="M 112 274 L 178 160 L 134 84 L 122 106 L 152 160 L 112 230 L 94 200 L 78 200 C 73 200 70 207 73 213 Z" fill="var(--logo-right, #66462C)" />
+                <!-- Center Interlocking S-Curve & Hexagon Core -->
+                <path d="M 104 16 L 92 36 C 108 64 126 90 126 105 C 126 116 116 122 86 122 L 64 160 L 84 195 C 74 204 70 218 70 228 C 70 248 90 274 104 304 L 116 284 C 100 256 88 236 88 224 C 88 212 98 204 122 204 L 146 160 L 124 122 C 138 112 144 98 144 86 C 144 66 120 42 104 16 Z M 94 138 L 114 138 L 126 160 L 114 182 L 94 182 L 82 160 Z" fill-rule="evenodd" fill="var(--logo-center, #F5EFE6)" />
+            </g>
+        </defs>
+    </svg>
+
+    <!-- Sticky Glassmorphism Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-obsidian/85 backdrop-blur-md border-b border-taupe/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-charcoal border border-gold/40 flex items-center justify-center p-1.5 shadow-lg group-hover:border-flame transition-colors">
+                    <svg viewBox="0 0 200 320" class="w-full h-full">
+                        <use href="#airfest-logo-mark" style="--logo-left: #9A8675; --logo-right: #66462C; --logo-center: #D4A843;"></use>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-display text-xl sm:text-2xl font-bold tracking-wider text-gold-gradient block leading-none">AIRFEST</span>
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-taupe block mt-1">Medieval × Revolution</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-parchment/80">
+                <a href="#konsep" class="hover:text-gold transition-colors">Konsep Utama</a>
+                <a href="#tema" class="hover:text-gold transition-colors">Filosofi Tema</a>
+                <a href="#keunggulan" class="hover:text-gold transition-colors">Keunggulan</a>
+                <a href="#arena" class="hover:text-gold transition-colors">Quest & Acara</a>
+                <a href="#identitas" class="hover:text-gold transition-colors">Logo & Palet Warna</a>
+            </nav>
+
+            <!-- CTA Button & Mobile Menu Toggle -->
+            <div class="flex items-center gap-3">
+                <a href="#simulasi" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-crimson to-flame text-parchment font-semibold text-xs uppercase tracking-wider shadow-lg shadow-crimson/30 btn-royal">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Simulasi Quest</span>
+                </a>
+                <button id="mobileMenuBtn" aria-label="Buka Menu" class="md:hidden p-2.5 rounded-xl bg-charcoal border border-taupe/30 text-gold hover:border-gold">
+                    <i class="fa-solid fa-bars-staggered text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-charcoal/95 border-b border-gold/20 px-6 py-5 space-y-3">
+            <a href="#konsep" class="mobile-link block py-2 text-parchment hover:text-gold border-b border-taupe/10">1. Konsep Utama AIRFEST</a>
+            <a href="#tema" class="mobile-link block py-2 text-parchment hover:text-gold border-b border-taupe/10">2. Tema Abad Pertengahan & Revolusi</a>
+            <a href="#keunggulan" class="mobile-link block py-2 text-parchment hover:text-gold border-b border-taupe/10">3. Keunggulan Strategis Tema</a>
+            <a href="#arena" class="mobile-link block py-2 text-parchment hover:text-gold border-b border-taupe/10">4. Pilar Acara & Gamifikasi</a>
+            <a href="#identitas" class="mobile-link block py-2 text-parchment hover:text-gold">5. Identitas Logo & Palet Warna</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="relative min-h-[92vh] flex items-center py-16 lg:py-24 overflow-hidden">
+            <!-- Decorative Radial Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-bronze/20 rounded-full blur-[130px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-[380px] h-[380px] bg-crimson/15 rounded-full blur-[110px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Column: Grand Narrative & CTAs -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left reveal active">
+                        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-charcoal border border-gold/40 text-gold text-xs font-semibold uppercase tracking-[0.2em]">
+                            <span class="w-2 h-2 rounded-full bg-flame animate-ping"></span>
+                            Blueprint Konsep Event & Identitas Visual
+                        </div>
+
+                        <h1 class="font-display text-4xl sm:text-5xl xl:text-6xl font-black leading-[1.12] tracking-tight">
+                            <span class="text-parchment block">AIRFEST:</span>
+                            <span class="text-gold-gradient">Era Kebangkitan</span>
+                            <span class="text-parchment"> &amp; </span>
+                            <span class="text-ember-gradient">Revolusi Ksatria</span>
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-parchment/80 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            Sebuah mahakarya festival generasi baru yang memadukan <strong class="text-gold font-semibold">kehormatan, keberanian, dan kemegahan Abad Pertengahan</strong> dengan <strong class="text-flame font-semibold">semangat pembaruan, terobosan berpikir, dan inovasi Masa Revolusi</strong>. Dirancang untuk mengubah peserta biasa menjadi Ksatria Pembawa Perubahan.
+                        </p>
+
+                        <!-- Interactive Pill Highlights -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
+                            <div class="px-3.5 py-2 rounded-xl bg-charcoal/90 border border-bronze/60 flex items-center gap-2 text-xs text-parchment/90">
+                                <i class="fa-solid fa-chess-rook text-gold"></i>
+                                <span>Estetika Kastil &amp; Heraldik Kerajaan</span>
+                            </div>
+                            <div class="px-3.5 py-2 rounded-xl bg-charcoal/90 border border-bronze/60 flex items-center gap-2 text-xs text-parchment/90">
+                                <i class="fa-solid fa-fire-flame-curved text-flame"></i>
+                                <span>Gamifikasi Quest &amp; Guild Kompetisi</span>
+                            </div>
+                            <div class="px-3.5 py-2 rounded-xl bg-charcoal/90 border border-bronze/60 flex items-center gap-2 text-xs text-parchment/90">
+                                <i class="fa-solid fa-gem text-taupe"></i>
+                                <span>Palet Obsidian, Perunggu, Emas &amp; Kirmizi</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#konsep" class="px-7 py-4 rounded-2xl bg-gradient-to-r from-crimson via-flame to-gold text-obsidian font-bold text-sm uppercase tracking-wider shadow-xl shadow-flame/25 btn-royal flex items-center gap-3">
+                                <span>Jelajahi Konsep Lengkap</span>
+                                <i class="fa-solid fa-arrow-down-long"></i>
+                            </a>
+                            <a href="#identitas" class="px-6 py-4 rounded-2xl bg-charcoal hover:bg-bronze/30 border border-gold/40 text-parchment font-semibold text-sm transition-all flex items-center gap-2.5">
+                                <i class="fa-solid fa-palette text-gold"></i>
+                                <span>Bedah Logo &amp; Palet Warna</span>
+                            </a>
+                        </div>
+
+                        <!-- Quick Stats / Pillars Counter -->
+                        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-taupe/20 max-w-lg mx-auto lg:mx-0">
+                            <div>
+                                <div class="font-medieval text-2xl sm:text-3xl font-bold text-gold">2 Era</div>
+                                <div class="text-xs text-taupe">Medieval × Revolusi</div>
+                            </div>
+                            <div>
+                                <div class="font-medieval text-2xl sm:text-3xl font-bold text-flame">4 Pilar</div>
+                                <div class="text-xs text-taupe">Arena Kompetisi &amp; Seni</div>
+                            </div>
+                            <div>
+                                <div class="font-medieval text-2xl sm:text-3xl font-bold text-parchment">100%</div>
+                                <div class="text-xs text-taupe">Imersi &amp; Gamifikasi</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Interactive Mascot Knight & Geometric Shield Showcase -->
+                    <div class="lg:col-span-5 flex flex-col items-center justify-center reveal active">
+                        <div id="mascotCard" class="relative w-full max-w-md aspect-square rounded-3xl medieval-card p-6 flex flex-col items-center justify-center overflow-hidden group cursor-pointer">
+                            <!-- Background Sacred Geometry Crest -->
+                            <svg viewBox="0 0 200 320" class="absolute w-72 h-72 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-700">
+                                <use href="#airfest-logo-mark" style="--logo-left: #D4A843; --logo-right: #D4A843; --logo-center: #F04E23;"></use>
+                            </svg>
+
+                            <!-- Mode Switcher Badge inside Card -->
+                            <div class="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
+                                <span class="px-3 py-1 rounded-full bg-obsidian/80 border border-gold/30 text-[11px] font-medium text-gold flex items-center gap-1.5">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-flame"></i>
+                                    Maskot &amp; Lambang Resmi
+                                </span>
+                                <button id="toggleVisualBtn" class="px-3 py-1 rounded-full bg-bronze/40 hover:bg-gold hover:text-obsidian border border-gold/40 text-[11px] font-semibold text-parchment transition-all">
+                                    Ganti Tampilan: <span id="visualModeLabel">Ksatria</span>
+                                </button>
+                            </div>
+
+                            <!-- VIEW 1: Custom Chibi Heroic Knight SVG (Faithful to Mascot Image 1) -->
+                            <div id="knightView" class="w-full h-full flex items-center justify-center pt-4 animate-float animate-glow transition-all duration-500">
+                                <svg viewBox="0 0 400 450" class="w-full h-full max-h-[340px]" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Flowing Crimson Cape (#9E1B24) -->
+                                    <path d="M 145 235 C 95 265, 55 320, 62 385 C 82 365, 105 375, 125 380 C 148 355, 175 375, 200 375 C 228 375, 255 360, 285 385 C 292 340, 275 270, 240 235 Z" fill="#7A1118" stroke="#0D0C0B" stroke-width="6" stroke-linejoin="round"/>
+                                    <path d="M 150 240 C 105 270, 72 320, 75 372 C 95 358, 118 368, 138 368 C 165 348, 215 355, 265 372 C 272 330, 255 275, 230 240 Z" fill="#9E1B24"/>
+
+                                    <!-- Fiery Red-Orange Plume on Helmet (#F04E23) -->
+                                    <g class="flame-plume">
+                                        <path d="M 195 122 C 160 105, 152 72, 165 55 C 172 70, 178 65, 175 40 C 188 52, 195 30, 192 15 C 212 32, 218 45, 222 28 C 232 48, 242 42, 238 65 C 248 55, 255 82, 235 108 C 222 120, 205 122, 195 122 Z" fill="url(#flameGrad)" stroke="#0D0C0B" stroke-width="5" stroke-linejoin="round"/>
+                                        <path d="M 198 115 C 178 100, 175 75, 185 60 C 192 72, 198 50, 202 38 C 212 55, 222 62, 222 82 C 222 100, 210 112, 198 115 Z" fill="#FF6B35" opacity="0.85"/>
+                                    </g>
+
+                                    <!-- Right Arm & Silver Broadsword -->
+                                    <g transform="translate(0, 0)">
+                                        <!-- Sword Blade -->
+                                        <polygon points="52,195 72,205 135,285 118,298" fill="#E2E8F0" stroke="#0D0C0B" stroke-width="5" stroke-linejoin="round"/>
+                                        <polygon points="52,195 62,200 126,291 118,298" fill="#94A3B8"/>
+                                        <!-- Sword Crossguard & Hilt -->
+                                        <path d="M 108 302 L 145 274 C 149 278, 149 284, 144 288 L 114 310 C 109 310, 105 306, 108 302 Z" fill="#CBD5E1" stroke="#0D0C0B" stroke-width="4"/>
+                                        <!-- Armored Gauntlet & Arm -->
+                                        <path d="M 155 242 L 122 285 L 140 302 L 175 265 Z" fill="url(#armorGrad)" stroke="#0D0C0B" stroke-width="5" stroke-linejoin="round"/>
+                                        <circle cx="132" cy="295" r="11" fill="#94A3B8" stroke="#0D0C0B" stroke-width="4"/>
+                                    </g>
+
+                                    <!-- Torso & Layered Silver/Gold Plate Armor -->
+                                    <path d="M 158 232 L 242 232 L 232 308 L 200 330 L 168 308 Z" fill="url(#armorGrad)" stroke="#0D0C0B" stroke-width="5" stroke-linejoin="round"/>
+                                    <!-- V-Shaped Gold Armor Trim -->
+                                    <path d="M 168 258 L 200 282 L 232 258" fill="none" stroke="#D4A843" stroke-width="5" stroke-linecap="round"/>
+                                    <path d="M 172 282 L 200 306 L 228 282" fill="none" stroke="#D4A843" stroke-width="5" stroke-linecap="round"/>
+
+                                    <!-- Legs & Greaves -->
+                                    <!-- Left Leg -->
+                                    <path d="M 168 312 L 152 385 L 182 392 L 195 328 Z" fill="url(#armorGrad)" stroke="#0D0C0B" stroke-width="5" stroke-linejoin="round"/>
+                                    <path d="M 142 395 C 142 382, 165 380, 182 388 L 182 402 L 142 402 Z" fill="#D4A843" stroke="#0D0C0B" stroke-width="4"/>
+                                    <!-- Right Leg -->
+                                    <path d="M 232 312 L 248 385 L 218 392 L 205 328 Z" fill="url(#armorGrad)" stroke="#0D0C0B" stroke-width="5" stroke-linejoin="round"/>
+                                    <path d="M 258 395 C 258 382, 235 380, 218 388 L 218 402 L 258 402 Z" fill="#D4A843" stroke="#0D0C0B" stroke-width="4"/>
+
+                                    <!-- Helmet Dome (Silver Steel with Gold Trim) -->
+                                    <ellipse cx="200" cy="182" rx="68" ry="62" fill="url(#armorGrad)" stroke="#0D0C0B" stroke-width="6"/>
+                                    <!-- Plume Holder Gem -->
+                                    <polygon points="190,122 200,114 210,122 206,132 194,132" fill="#D4A843" stroke="#0D0C0B" stroke-width="4"/>
+
+                                    <!-- Golden Knight Visor / Faceguard (#D4A843) -->
+                                    <path d="M 128 175 L 200 142 L 272 175 L 256 232 L 200 256 L 144 232 Z" fill="url(#goldGrad)" stroke="#0D0C0B" stroke-width="6" stroke-linejoin="round"/>
+                                    <!-- Visor Vertical Slits -->
+                                    <rect x="155" y="182" width="9" height="38" rx="4" fill="#1A1715"/>
+                                    <rect x="174" y="176" width="10" height="48" rx="4" fill="#1A1715"/>
+                                    <rect x="216" y="176" width="10" height="48" rx="4" fill="#1A1715"/>
+                                    <rect x="235" y="182" width="9" height="38" rx="4" fill="#1A1715"/>
+
+                                    <!-- Golden Diamond Shield with AIRFEST Geometric Logo -->
+                                    <g transform="translate(222, 210)">
+                                        <polygon points="58,0 112,88 58,176 4,88" fill="url(#goldGrad)" stroke="#0D0C0B" stroke-width="6" stroke-linejoin="round"/>
+                                        <polygon points="58,12 102,88 58,164 14,88" fill="#8C621E" opacity="0.35"/>
+                                        <!-- Embedded AIRFEST Geometric Emblem on Shield -->
+                                        <svg x="16" y="18" width="84" height="140" viewBox="0 0 200 320">
+                                            <use href="#airfest-logo-mark" style="--logo-left: #FFF0C2; --logo-right: #B5892E; --logo-center: #3B2510;"></use>
+                                        </svg>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <!-- VIEW 2: Sacred Geometric AIRFEST Diamond Logo (Hidden by Default, Toggled by User) -->
+                            <div id="logoView" class="hidden w-full h-full flex-col items-center justify-center pt-6 animate-float">
+                                <svg viewBox="0 0 200 320" class="w-56 h-64 drop-shadow-[0_0_30px_rgba(212,168,67,0.45)]">
+                                    <use href="#airfest-logo-mark" style="--logo-left: #9A8675; --logo-right: #66462C; --logo-center: #F5EFE6;"></use>
+                                </svg>
+                                <p class="text-xs text-gold font-medieval uppercase tracking-widest mt-3">Simbol Berlian Interlocking AIRFEST</p>
+                            </div>
+
+                            <!-- Bottom Caption inside Card -->
+                            <div class="w-full pt-3 border-t border-taupe/20 flex items-center justify-between text-xs text-taupe">
+                                <span><i class="fa-solid fa-fire text-flame mr-1"></i> Semangat Ksatria Muda</span>
+                                <span class="text-gold font-semibold">Klik kartu untuk ganti mode</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 1: TENTANG KONSEP AIRFEST ================= -->
+        <section id="konsep" class="py-20 lg:py-28 relative border-t border-taupe/15">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Heading -->
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <div class="diamond-divider mb-4">
+                        <span class="text-xs font-medieval uppercase tracking-[0.3em] text-gold">Bab I • Esensi &amp; Definisi</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-parchment mb-5">
+                        Apa Itu Konsep Event <span class="text-gold-gradient">AIRFEST</span>?
+                    </h2>
+                    <p class="text-parchment/75 text-base sm:text-lg leading-relaxed">
+                        Berdasarkan identitas visual ksatria berzirah dan lambang berlian saling mengunci yang Anda miliki, berikut adalah rumusan lengkap konsep event <strong class="text-gold">AIRFEST</strong> yang siap dipresentasikan kepada sponsor, panitia, maupun peserta.
+                    </p>
+                </div>
+
+                <!-- 3 Core Concept Pillars -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="medieval-card rounded-3xl p-8 reveal">
+                        <div class="w-14 h-14 rounded-2xl bg-bronze/30 border border-gold/40 flex items-center justify-center text-gold text-2xl mb-6">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <span class="text-xs font-medieval uppercase tracking-widest text-taupe">1. Definisi &amp; Skala Acara</span>
+                        <h3 class="font-medieval text-2xl font-bold text-parchment mt-2 mb-4">Festival Kolaborasi, Kompetisi &amp; Selebrasi</h3>
+                        <p class="text-parchment/75 text-sm leading-relaxed mb-4">
+                            <strong>AIRFEST</strong> adalah perhelatan akbar tahunan (festival multidisiplin) yang mempertemukan talenta terbaik dalam bidang <strong>akademik, seni pertunjukan, olahraga/e-sport, dan kewirausahaan kreatif</strong>.
+                        </p>
+                        <p class="text-parchment/75 text-sm leading-relaxed">
+                            Bukan sekadar perlombaan biasa, AIRFEST dirancang sebagai <em>"The Grand Arena"</em>—sebuah ekosistem tempat generasi muda menguji ketangguhan mental, beradu gagasan, dan merayakan karya di panggung megah.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="medieval-card rounded-3xl p-8 reveal">
+                        <div class="w-14 h-14 rounded-2xl bg-crimson/30 border border-flame/40 flex items-center justify-center text-flame text-2xl mb-6">
+                            <i class="fa-solid fa-fire-burner"></i>
+                        </div>
+                        <span class="text-xs font-medieval uppercase tracking-widest text-taupe">2. Makna Filosofis Maskot</span>
+                        <h3 class="font-medieval text-2xl font-bold text-parchment mt-2 mb-4">Sang Ksatria Api Pembawa Perubahan</h3>
+                        <p class="text-parchment/75 text-sm leading-relaxed mb-4">
+                            Maskot Ksatria dengan <strong>jambul api membara (Flame Plume)</strong> melambangkan gairah, antusiasme, dan kreativitas yang tak pernah padam. <strong>Pedang Perak</strong> menyimbolkan ketajaman intelektual dan keberanian mengambil keputusan.
+                        </p>
+                        <p class="text-parchment/75 text-sm leading-relaxed">
+                            Sementara <strong>Perisai Berlian Emas</strong> melambangkan ketahanan karakter, etika, serta persatuan seluruh elemen acara di bawah panji kehormatan AIRFEST.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="medieval-card rounded-3xl p-8 reveal">
+                        <div class="w-14 h-14 rounded-2xl bg-charcoal border border-taupe/50 flex items-center justify-center text-taupe text-2xl mb-6">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <span class="text-xs font-medieval uppercase tracking-widest text-taupe">3. Makna Lambang Berlian</span>
+                        <h3 class="font-medieval text-2xl font-bold text-parchment mt-2 mb-4">Harmoni Geometris &amp; Inti Heksagon</h3>
+                        <p class="text-parchment/75 text-sm leading-relaxed mb-4">
+                            Logo AIRFEST terdiri dari <strong>dua sayap sudut siku</strong> (berwarna Taupe &amp; Perunggu) yang mengapit <strong>kurva dinamis berinti heksagon</strong> di tengahnya.
+                        </p>
+                        <p class="text-parchment/75 text-sm leading-relaxed">
+                            Ini merepresentasikan pertemuan antara <strong>ketegasan masa lalu (Abad Pertengahan)</strong> dan <strong>keluwesan inovasi masa depan (Masa Revolusi)</strong> yang berpusat pada satu titik kolaborasi yang kokoh.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: TEMA UTAMA (ABAD PERTENGAHAN & MASA REVOLUSI) ================= -->
+        <section id="tema" class="py-20 lg:py-28 bg-charcoal/60 border-t border-b border-taupe/15 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                    <div class="diamond-divider mb-4">
+                        <span class="text-xs font-medieval uppercase tracking-[0.3em] text-flame">Bab II • Sintesis Dua Zaman</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-parchment mb-5">
+                        Tema Utama: <span class="text-gold-gradient">Abad Pertengahan</span> &amp; <span class="text-ember-gradient">Masa Revolusi</span>
+                    </h2>
+                    <p class="text-parchment/75 text-base sm:text-lg">
+                        Mengapa menggabungkan <em>Medieval Era</em> dengan <em>Age of Revolution</em>? Karena perubahan besar tidak pernah lahir tanpa fondasi karakter yang kuat. Klik tombol di bawah untuk membedah masing-masing pilar filosofinya!
+                    </p>
+                </div>
+
+                <!-- Interactive Era Switcher Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+                    <button onclick="switchEra('medieval')" id="btn-era-medieval" class="era-tab-btn px-6 py-3.5 rounded-2xl font-medieval font-bold text-sm uppercase tracking-wider transition-all bg-gold text-obsidian shadow-lg shadow-gold/25">
+                        <i class="fa-solid fa-shield-halved mr-2"></i>I. Pilar Abad Pertengahan
+                    </button>
+                    <button onclick="switchEra('revolution')" id="btn-era-revolution" class="era-tab-btn px-6 py-3.5 rounded-2xl font-medieval font-bold text-sm uppercase tracking-wider transition-all bg-obsidian/90 text-parchment border border-taupe/30 hover:border-flame">
+                        <i class="fa-solid fa-bolt-lightning mr-2 text-flame"></i>II. Pilar Masa Revolusi
+                    </button>
+                    <button onclick="switchEra('synthesis')" id="btn-era-synthesis" class="era-tab-btn px-6 py-3.5 rounded-2xl font-medieval font-bold text-sm uppercase tracking-wider transition-all bg-obsidian/90 text-parchment border border-taupe/30 hover:border-gold">
+                        <i class="fa-solid fa-wand-sparkles mr-2 text-gold"></i>III. Sintesis di AIRFEST
+                    </button>
+                </div>
+
+                <!-- Dynamic Era Content Container -->
+                <div id="eraContentBox" class="medieval-card rounded-3xl p-8 sm:p-12 reveal">
+                    <!-- Rendered dynamically via JS, pre-populated with Medieval default -->
+                    <div id="eraInnerContent" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <!-- Populated by JS on load -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: KEUNGGULAN TEMA INI ================= -->
+        <section id="keunggulan" class="py-20 lg:py-28 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <div class="diamond-divider mb-4">
+                        <span class="text-xs font-medieval uppercase tracking-[0.3em] text-gold">Bab III • Nilai Jual &amp; Dampak</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-parchment mb-5">
+                        Keunggulan Tema <span class="text-gold-gradient">Medieval × Revolusi</span>
+                    </h2>
+                    <p class="text-parchment/75 text-base sm:text-lg">
+                        Tema ini bukan hanya indah di atas kertas, tetapi memiliki keunggulan strategis yang membuat event <strong>AIRFEST</strong> jauh lebih unggul, berkesan, dan mudah dipasarkan dibanding tema festival standar.
+                    </p>
+                </div>
+
+                <!-- 6 Advantages Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                    
+                    <!-- Keunggulan 1 -->
+                    <div class="medieval-card rounded-3xl p-7 flex flex-col justify-between reveal">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="w-12 h-12 rounded-2xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold text-xl">
+                                    <i class="fa-solid fa-archway"></i>
+                                </span>
+                                <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-charcoal border border-taupe/30 text-taupe">Keunggulan #01</span>
+                            </div>
+                            <h3 class="font-medieval text-xl font-bold text-gold mb-3">Visual Spektakuler &amp; Imersi Ruang Tinggi</h3>
+                            <p class="text-sm text-parchment/80 leading-relaxed">
+                                Sangat mudah diterjemahkan ke dalam dekorasi fisik: gerbang masuk berbentuk <strong>Benteng Kastil (Citadel Gate)</strong>, panji-panji gantung berlogo berlian AIRFEST, obor LED hangat, serta panggung bernuansa kerajaan modern yang langsung memukau pengunjung sejak langkah pertama.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-taupe/20 text-xs text-gold flex items-center justify-between">
+                            <span>Spot Foto &amp; Stage Design</span>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Keunggulan 2 -->
+                    <div class="medieval-card rounded-3xl p-7 flex flex-col justify-between reveal">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="w-12 h-12 rounded-2xl bg-flame/15 border border-flame/40 flex items-center justify-center text-flame text-xl">
+                                    <i class="fa-solid fa-scroll"></i>
+                                </span>
+                                <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-charcoal border border-taupe/30 text-taupe">Keunggulan #02</span>
+                            </div>
+                            <h3 class="font-medieval text-xl font-bold text-flame mb-3">Potensi Gamifikasi &amp; Sistem "Quest"</h3>
+                            <p class="text-sm text-parchment/80 leading-relaxed">
+                                Mengubah pengalaman pengunjung pasif menjadi aktif. Peserta dan penonton dapat diberikan <strong>"Knight Passport / Guild Card"</strong> untuk menyelesaikan misi (menonton lomba, mengunjungi booth sponsor, menjawab tantangan) demi mengumpulkan stempel berlian dan menukar hadiah.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-taupe/20 text-xs text-flame flex items-center justify-between">
+                            <span>Engagement Pengunjung Tinggi</span>
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                    </div>
+
+                    <!-- Keunggulan 3 -->
+                    <div class="medieval-card rounded-3xl p-7 flex flex-col justify-between reveal">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="w-12 h-12 rounded-2xl bg-bronze/30 border border-taupe/40 flex items-center justify-center text-parchment text-xl">
+                                    <i class="fa-solid fa-compass-drafting"></i>
+                                </span>
+                                <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-charcoal border border-taupe/30 text-taupe">Keunggulan #03</span>
+                            </div>
+                            <h3 class="font-medieval text-xl font-bold text-parchment mb-3">Fleksibilitas Lintas Cabang Lomba</h3>
+                            <p class="text-sm text-parchment/80 leading-relaxed">
+                                Penggabungan "Abad Pertengahan" dan "Masa Revolusi" membuat semua jenis acara terasa nyambung: lomba olahraga/e-sport memakai konsep <strong>Gladiator/Knight Tournament</strong>, lomba ilmiah memakai konsep <strong>Revolusi Pemikiran</strong>, dan pentas musik memakai konsep <strong>Renaissance Night</strong>.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-taupe/20 text-xs text-taupe flex items-center justify-between">
+                            <span>Cocok untuk Semua Divisi</span>
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                    </div>
+
+                    <!-- Keunggulan 4 -->
+                    <div class="medieval-card rounded-3xl p-7 flex flex-col justify-between reveal">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="w-12 h-12 rounded-2xl bg-crimson/25 border border-crimson/50 flex items-center justify-center text-flame text-xl">
+                                    <i class="fa-solid fa-shirt"></i>
+                                </span>
+                                <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-charcoal border border-taupe/30 text-taupe">Keunggulan #04</span>
+                            </div>
+                            <h3 class="font-medieval text-xl font-bold text-gold mb-3">Daya Jual Merchandise &amp; Kostum Tinggi</h3>
+                            <p class="text-sm text-parchment/80 leading-relaxed">
+                                Logo berlian geometris yang minimalis-elegan ditambah maskot Ksatria Chibi yang ikonik sangat keren ketika dicetak pada <strong>T-Shirt, Hoodie, Lanyard, Enamel Pin, Totebag, hingga Stiker</strong>. Menjadi sumber pemasukan dana (fundraising) yang sangat kuat bagi panitia.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-taupe/20 text-xs text-gold flex items-center justify-between">
+                            <span>Monetisasi &amp; Branding Kuat</span>
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                    </div>
+
+                    <!-- Keunggulan 5 -->
+                    <div class="medieval-card rounded-3xl p-7 flex flex-col justify-between reveal">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="w-12 h-12 rounded-2xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold text-xl">
+                                    <i class="fa-solid fa-handshake-simple"></i>
+                                </span>
+                                <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-charcoal border border-taupe/30 text-taupe">Keunggulan #05</span>
+                            </div>
+                            <h3 class="font-medieval text-xl font-bold text-flame mb-3">Daya Tarik Proposal bagi Sponsor</h3>
+                            <p class="text-sm text-parchment/80 leading-relaxed">
+                                Paket sponsorship dapat dikemas dengan penamaan berkelas kerajaan seperti <strong>"Imperial Tier", "Royal Vanguard", "Golden Shield", dan "Knight Ally"</strong>. Palet warna emas, perunggu, dan obsidian memberikan kesan prestisius dan profesional di mata mitra korporat.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-taupe/20 text-xs text-flame flex items-center justify-between">
+                            <span>Prestise Proposal Tinggi</span>
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                    </div>
+
+                    <!-- Keunggulan 6 -->
+                    <div class="medieval-card rounded-3xl p-7 flex flex-col justify-between reveal">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="w-12 h-12 rounded-2xl bg-bronze/30 border border-taupe/40 flex items-center justify-center text-parchment text-xl">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                </span>
+                                <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-charcoal border border-taupe/30 text-taupe">Keunggulan #06</span>
+                            </div>
+                            <h3 class="font-medieval text-xl font-bold text-parchment mb-3">Storytelling Media Sosial yang Epik</h3>
+                            <p class="text-sm text-parchment/80 leading-relaxed">
+                                Kampanye Instagram/TikTok tidak terasa membosankan. Pengumuman pendaftaran dibuka dengan <strong>"Dekrit Kerajaan / Panggilan Revolusi"</strong>, teaser maskot ksatria, hingga hitung mundur pembukaan gerbang kastil yang memicu rasa penasaran (FOMO) audiens.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-taupe/20 text-xs text-taupe flex items-center justify-between">
+                            <span>Narasi Kampanye Viral</span>
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: RANGKAIAN ACARA & SIMULASI QUEST ================= -->
+        <section id="arena" class="py-20 lg:py-28 bg-charcoal/60 border-t border-b border-taupe/15">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+                    <div class="diamond-divider mb-4">
+                        <span class="text-xs font-medieval uppercase tracking-[0.3em] text-gold">Bab IV • Struktur Program</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-parchment mb-5">
+                        4 Pilar Arena <span class="text-gold-gradient">AIRFEST</span>
+                    </h2>
+                    <p class="text-parchment/75 text-base sm:text-lg">
+                        Penamaan setiap mata acara disesuaikan dengan kosakata <strong>Abad Pertengahan &amp; Masa Revolusi</strong> agar atmosfer acara terasa utuh dari awal hingga malam puncak.
+                    </p>
+                </div>
+
+                <!-- 4 Event Zones -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+                    
+                    <!-- Zone 1 -->
+                    <div class="medieval-card rounded-3xl p-8 reveal">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-flame">Pilar I • Olahraga &amp; E-Sports</span>
+                                <h3 class="font-medieval text-2xl font-bold text-parchment mt-1">Tournament of Valor</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-crimson/30 border border-flame/40 flex items-center justify-center text-flame text-xl shrink-0">
+                                <i class="fa-solid fa-khanda"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-parchment/80 leading-relaxed mb-5">
+                            Arena ketangkasan fisik, strategi tim, dan sportivitas tinggi yang mengadopsi semangat ksatria di medan laga. Setiap tim bertanding membawa panji kebanggaan sekolah/komunitasnya.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">E-Sports Championship</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Futsal / Basket Royal Cup</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Panahan / Ketangkasan</span>
+                        </div>
+                    </div>
+
+                    <!-- Zone 2 -->
+                    <div class="medieval-card rounded-3xl p-8 reveal">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-gold">Pilar II • Akademik, Inovasi &amp; Debat</span>
+                                <h3 class="font-medieval text-2xl font-bold text-parchment mt-1">Council of Revolution</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-bronze/30 border border-gold/40 flex items-center justify-center text-gold text-xl shrink-0">
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-parchment/80 leading-relaxed mb-5">
+                            Wadah pertarungan gagasan, pemecahan masalah masa depan, dan terobosan intelektual. Mewakili semangat Masa Revolusi yang menggugah kesadaran dan melahirkan solusi baru.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Debat Parlemen &amp; Orasi</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Olimpiade Sains &amp; Logika</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Inovasi Karya &amp; Desain</span>
+                        </div>
+                    </div>
+
+                    <!-- Zone 3 -->
+                    <div class="medieval-card rounded-3xl p-8 reveal">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-taupe">Pilar III • Seni, Budaya &amp; Malam Puncak</span>
+                                <h3 class="font-medieval text-2xl font-bold text-parchment mt-1">The Grand Renaissance Stage</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-charcoal border border-taupe/50 flex items-center justify-center text-parchment text-xl shrink-0">
+                                <i class="fa-solid fa-masks-theater"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-parchment/80 leading-relaxed mb-5">
+                            Panggung ekspresi estetika yang merayakan kebangkitan seni dari era klasik hingga musik modern. Puncak acara ditutup dengan seremoni penobatan pemenang dan konser megah.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Festival Band &amp; Orkestra</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Tari Kreasi &amp; Teater Epik</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Awarding &amp; Closing Concert</span>
+                        </div>
+                    </div>
+
+                    <!-- Zone 4 -->
+                    <div class="medieval-card rounded-3xl p-8 reveal">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-flame">Pilar IV • Expo Kreatif, Kuliner &amp; Komunitas</span>
+                                <h3 class="font-medieval text-2xl font-bold text-parchment mt-1">Bazaar of the Realm</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold text-xl shrink-0">
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-parchment/80 leading-relaxed mb-5">
+                            Area pasar kerajaan dan pameran karya interaktif tempat pengunjung bersantai, mencicipi kuliner tematik, membeli merchandise resmi AIRFEST, dan mengikuti mini-games berhadiah.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Royal Tavern Culinary</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Armory Official Merch</span>
+                            <span class="px-3 py-1 rounded-lg bg-obsidian border border-taupe/25 text-xs text-gold">Photobooth &amp; Quest Guild</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Gamification Quest Simulator -->
+                <div id="simulasi" class="medieval-card rounded-3xl p-8 sm:p-10 border-gold/40 reveal">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-taupe/20">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-flame/20 border border-flame/40 text-flame text-xs font-semibold uppercase tracking-wider">
+                                Fitur Unggulan Konsep • Gamifikasi Pengunjung
+                            </span>
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-parchment mt-3">
+                                Simulasi Perjalanan Ksatria (Interactive Quest Map)
+                            </h3>
+                            <p class="text-sm text-parchment/75 mt-1">
+                                Klik setiap tahapan di bawah untuk melihat bagaimana alur pengalaman peserta/pengunjung dirancang di dalam <strong>AIRFEST</strong>.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 bg-obsidian px-4 py-3 rounded-2xl border border-gold/30 shrink-0">
+                            <i class="fa-solid fa-medal text-2xl text-gold"></i>
+                            <div>
+                                <div class="text-[11px] uppercase tracking-wider text-taupe">Pangkat Pengunjung</div>
+                                <div id="questRankTitle" class="font-medieval font-bold text-gold text-sm">Tahap 1: Novice Squire</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stepper Buttons -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-8">
+                        <button onclick="selectQuestStep(0)" id="qstep-0" class="quest-step-btn p-4 rounded-2xl border text-left transition-all bg-gold/15 border-gold text-parchment">
+                            <div class="text-xs font-mono text-gold mb-1">QUEST 01</div>
+                            <div class="font-medieval font-bold text-sm">Gerbang Kastil</div>
+                        </button>
+                        <button onclick="selectQuestStep(1)" id="qstep-1" class="quest-step-btn p-4 rounded-2xl border text-left transition-all bg-obsidian/70 border-taupe/25 text-parchment/70 hover:border-gold/50">
+                            <div class="text-xs font-mono text-taupe mb-1">QUEST 02</div>
+                            <div class="font-medieval font-bold text-sm">Arena &amp; Serikat</div>
+                        </button>
+                        <button onclick="selectQuestStep(2)" id="qstep-2" class="quest-step-btn p-4 rounded-2xl border text-left transition-all bg-obsidian/70 border-taupe/25 text-parchment/70 hover:border-gold/50">
+                            <div class="text-xs font-mono text-taupe mb-1">QUEST 03</div>
+                            <div class="font-medieval font-bold text-sm">Bursa Revolusi</div>
+                        </button>
+                        <button onclick="selectQuestStep(3)" id="qstep-3" class="quest-step-btn p-4 rounded-2xl border text-left transition-all bg-obsidian/70 border-taupe/25 text-parchment/70 hover:border-gold/50">
+                            <div class="text-xs font-mono text-taupe mb-1">QUEST 04</div>
+                            <div class="font-medieval font-bold text-sm">Malam Penobatan</div>
+                        </button>
+                    </div>
+
+                    <!-- Step Detail Output -->
+                    <div id="questStepDetail" class="bg-obsidian/90 rounded-2xl p-6 sm:p-8 border border-taupe/20">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: IDENTITAS VISUAL & PALET WARNA DARI LOGO ================= -->
+        <section id="identitas" class="py-20 lg:py-28 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <div class="diamond-divider mb-4">
+                        <span class="text-xs font-medieval uppercase tracking-[0.3em] text-gold">Bab V • Panduan Desain &amp; Warna</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-parchment mb-5">
+                        Sistem Identitas &amp; <span class="text-gold-gradient">Palet Warna Resmi</span>
+                    </h2>
+                    <p class="text-parchment/75 text-base sm:text-lg">
+                        Seluruh palet warna di bawah ini diekstrak secara presisi dari <strong>Logo Geometris Berlian AIRFEST</strong> (Cokelat Perunggu, Taupe Hangat, Obsidian) serta <strong>Maskot Ksatria</strong> (Emas Diraja, Merah Jubah Kirmizi, dan Oranye Jambul Api). Klik kartu warna untuk menyalin kode HEX!
+                    </p>
+                </div>
+
+                <!-- Interactive Logo Color Tester + Anatomy -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14 items-stretch">
+                    
+                    <!-- Left: Live Logo Variant Previewer -->
+                    <div class="lg:col-span-5 medieval-card rounded-3xl p-8 flex flex-col items-center justify-between text-center reveal">
+                        <div class="w-full flex items-center justify-between text-xs text-taupe border-b border-taupe/20 pb-4">
+                            <span class="font-semibold text-parchment">Simulasi Aplikasi Logo</span>
+                            <span id="logoPresetName" class="text-gold font-mono">Versi Asli (Bronze &amp; Taupe)</span>
+                        </div>
+
+                        <div id="logoPreviewContainer" class="my-8 w-48 h-56 rounded-2xl bg-obsidian border border-gold/30 flex items-center justify-center p-6 shadow-inner transition-colors duration-500">
+                            <svg viewBox="0 0 200 320" class="w-full h-full drop-shadow-[0_0_20px_rgba(212,168,67,0.25)]">
+                                <use id="interactiveLogoUse" href="#airfest-logo-mark" style="--logo-left: #9A8675; --logo-right: #66462C; --logo-center: #F5EFE6;"></use>
+                            </svg>
+                        </div>
+
+                        <div class="w-full space-y-3">
+                            <p class="text-xs text-parchment/70">Uji tampilan logo pada berbagai media cetak &amp; latar panggung:</p>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setLogoTheme('original')" class="px-3 py-2 rounded-xl bg-charcoal hover:bg-bronze/40 border border-gold/40 text-xs font-medium text-parchment transition-all">
+                                    1. Logo Asli
+                                </button>
+                                <button onclick="setLogoTheme('shield')" class="px-3 py-2 rounded-xl bg-charcoal hover:bg-bronze/40 border border-gold/40 text-xs font-medium text-gold transition-all">
+                                    2. Emas Perisai
+                                </button>
+                                <button onclick="setLogoTheme('light')" class="px-3 py-2 rounded-xl bg-parchment text-obsidian hover:opacity-90 text-xs font-bold transition-all">
+                                    3. Latar Terang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Explanation of Visual Harmony -->
+                    <div class="lg:col-span-7 medieval-card rounded-3xl p-8 flex flex-col justify-between reveal">
+                        <div>
+                            <span class="text-xs font-medieval uppercase tracking-widest text-gold">Arsitektur Visual</span>
+                            <h3 class="font-medieval text-2xl sm:text-3xl font-bold text-parchment mt-2 mb-4">
+                                Mengapa Palet Warna Ini Sangat Kuat untuk Tema Abad Pertengahan &amp; Revolusi?
+                            </h3>
+                            <p class="text-sm text-parchment/80 leading-relaxed mb-6">
+                                Kombinasi warna dari logo dan maskot Anda secara alami membentuk hierarki desain yang sangat matang dan berkelas:
+                            </p>
+
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-2xl bg-obsidian/80 border border-taupe/20 flex items-start gap-4">
+                                    <div class="w-4 h-10 rounded-full bg-gradient-to-b from-[#9A8675] to-[#66462C] shrink-0 mt-0.5"></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-parchment">1. Fondasi Tanah, Besi &amp; Sejarah (Warm Taupe &amp; Antique Bronze)</h4>
+                                        <p class="text-xs text-parchment/70 mt-1 leading-relaxed">
+                                            Diambil langsung dari sayap kiri dan kanan logo berlian Anda. Warna cokelat perunggu dan taupe memberikan kesan artefak klasik, kulit perkamen, kayu kastil, dan fondasi sejarah yang kokoh.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-2xl bg-obsidian/80 border border-gold/30 flex items-start gap-4">
+                                    <div class="w-4 h-10 rounded-full bg-gradient-to-b from-[#D4A843] to-[#B5892E] shrink-0 mt-0.5"></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-gold">2. Kemuliaan &amp; Kejayaan Ksatria (Royal Gold &amp; Burnished Brass)</h4>
+                                        <p class="text-xs text-parchment/70 mt-1 leading-relaxed">
+                                            Diambil dari visor helm dan perisai berlian sang ksatria. Digunakan pada judul utama, bingkai kartu, dan mahkota pemenang untuk memancarkan kemegahan kerajaan.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-2xl bg-obsidian/80 border border-flame/30 flex items-start gap-4">
+                                    <div class="w-4 h-10 rounded-full bg-gradient-to-b from-[#F04E23] to-[#9E1B24] shrink-0 mt-0.5"></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-flame">3. Percikan Api Revolusi (Flame Plume &amp; Crimson Cape)</h4>
+                                        <p class="text-xs text-parchment/70 mt-1 leading-relaxed">
+                                            Diambil dari jambul api dan jubah ksatria. Menjadi warna aksen (Call-to-Action) yang menyuntikkan adrenalin, keberanian, dan semangat pergerakan Masa Revolusi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-taupe/20 flex items-center justify-between text-xs text-taupe">
+                            <span>Rasio Desain Ideal: 60% Obsidian/Charcoal • 25% Bronze/Taupe/Gold • 15% Flame/Crimson</span>
+                            <i class="fa-solid fa-circle-check text-gold"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Color Swatches Grid (Click to Copy HEX) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 reveal">
+                    
+                    <!-- Swatch 1 -->
+                    <button onclick="copyHex('#0D0C0B', 'Obsidian Black')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#0D0C0B] border border-taupe/30 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-parchment/60 group-hover:text-gold"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Obsidian Black</div>
+                        <div class="text-[11px] font-mono text-gold">#0D0C0B</div>
+                        <div class="text-[10px] text-taupe mt-1">Latar Utama</div>
+                    </button>
+
+                    <!-- Swatch 2 -->
+                    <button onclick="copyHex('#66462C', 'Antique Bronze')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#66462C] border border-white/10 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-parchment/80 group-hover:text-white"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Antique Bronze</div>
+                        <div class="text-[11px] font-mono text-gold">#66462C</div>
+                        <div class="text-[10px] text-taupe mt-1">Sayap Kanan Logo</div>
+                    </button>
+
+                    <!-- Swatch 3 -->
+                    <button onclick="copyHex('#9A8675', 'Warm Taupe')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#9A8675] border border-white/10 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-obsidian font-semibold"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Warm Taupe</div>
+                        <div class="text-[11px] font-mono text-gold">#9A8675</div>
+                        <div class="text-[10px] text-taupe mt-1">Sayap Kiri Logo</div>
+                    </button>
+
+                    <!-- Swatch 4 -->
+                    <button onclick="copyHex('#D4A843', 'Royal Gold')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#D4A843] border border-white/10 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-obsidian font-semibold"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Royal Gold</div>
+                        <div class="text-[11px] font-mono text-gold">#D4A843</div>
+                        <div class="text-[10px] text-taupe mt-1">Perisai &amp; Visor</div>
+                    </button>
+
+                    <!-- Swatch 5 -->
+                    <button onclick="copyHex('#9E1B24', 'Crimson Cape')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#9E1B24] border border-white/10 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-parchment/90"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Crimson Cape</div>
+                        <div class="text-[11px] font-mono text-gold">#9E1B24</div>
+                        <div class="text-[10px] text-taupe mt-1">Jubah Ksatria</div>
+                    </button>
+
+                    <!-- Swatch 6 -->
+                    <button onclick="copyHex('#F04E23', 'Flame Plume')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#F04E23] border border-white/10 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-obsidian font-semibold"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Flame Plume</div>
+                        <div class="text-[11px] font-mono text-gold">#F04E23</div>
+                        <div class="text-[10px] text-taupe mt-1">Jambul Api &amp; CTA</div>
+                    </button>
+
+                    <!-- Swatch 7 -->
+                    <button onclick="copyHex('#A8B2B8', 'Steel Armor')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#A8B2B8] border border-white/10 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-obsidian font-semibold"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Steel Armor</div>
+                        <div class="text-[11px] font-mono text-gold">#A8B2B8</div>
+                        <div class="text-[10px] text-taupe mt-1">Zirah &amp; Pedang</div>
+                    </button>
+
+                    <!-- Swatch 8 -->
+                    <button onclick="copyHex('#F5EFE6', 'Parchment Cream')" class="medieval-card rounded-2xl p-3 text-left group cursor-pointer">
+                        <div class="w-full h-20 rounded-xl bg-[#F5EFE6] border border-white/10 mb-3 flex items-end p-2">
+                            <span class="text-[10px] font-mono text-obsidian font-semibold"><i class="fa-regular fa-copy mr-1"></i>Salin</span>
+                        </div>
+                        <div class="font-bold text-xs text-parchment truncate">Parchment Cream</div>
+                        <div class="text-[11px] font-mono text-gold">#F5EFE6</div>
+                        <div class="text-[10px] text-taupe mt-1">Tipografi Utama</div>
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= FOOTER / MANIFESTO PENUTUP ================= -->
+        <footer class="bg-obsidian border-t border-gold/25 py-16 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-charcoal border border-gold/40 flex items-center justify-center p-2.5 mb-6 shadow-xl">
+                    <svg viewBox="0 0 200 320" class="w-full h-full">
+                        <use href="#airfest-logo-mark" style="--logo-left: #9A8675; --logo-right: #66462C; --logo-center: #D4A843;"></use>
+                    </svg>
+                </div>
+                <h2 class="font-display text-2xl sm:text-3xl font-bold text-gold-gradient mb-3">
+                    AIRFEST — "Tempa Kehormatan, Nyalakan Revolusi"
+                </h2>
+                <p class="text-sm text-taupe max-w-xl mx-auto mb-8">
+                    Dokumen web interaktif ini dirancang khusus sebagai pedoman konsep, filosofi tema, serta sistem identitas visual resmi untuk perhelatan AIRFEST.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-xs text-parchment/60">
+                    <span><i class="fa-solid fa-shield-halved text-gold mr-1.5"></i>Tema: Abad Pertengahan &amp; Masa Revolusi</span>
+                    <span>•</span>
+                    <span><i class="fa-solid fa-palette text-flame mr-1.5"></i>Palet: Bronze, Taupe, Gold, Crimson &amp; Obsidian</span>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Custom Toast Notification for Clipboard Copy (No alert() used) -->
+    <div id="toastBox" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="px-5 py-3.5 rounded-2xl bg-charcoal border border-gold text-parchment shadow-2xl flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-gold/20 flex items-center justify-center text-gold">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <div id="toastTitle" class="text-xs font-bold text-gold">Kode Warna Disalin!</div>
+                <div id="toastDesc" class="text-xs text-parchment/80">HEX berhasil disalin ke papan klip.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive JavaScript Logic -->
+    <script>
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // 2. Hero Mascot <-> Geometric Logo Toggle
+        const mascotCard = document.getElementById('mascotCard');
+        const knightView = document.getElementById('knightView');
+        const logoView = document.getElementById('logoView');
+        const visualModeLabel = document.getElementById('visualModeLabel');
+        let showingKnight = true;
+
+        mascotCard.addEventListener('click', () => {
+            showingKnight = !showingKnight;
+            if (showingKnight) {
+                knightView.classList.remove('hidden');
+                knightView.classList.add('flex');
+                logoView.classList.add('hidden');
+                logoView.classList.remove('flex');
+                visualModeLabel.textContent = 'Ksatria';
+            } else {
+                knightView.classList.add('hidden');
+                knightView.classList.remove('flex');
+                logoView.classList.remove('hidden');
+                logoView.classList.add('flex');
+                visualModeLabel.textContent = 'Logo Berlian';
+            }
+        });
+
+        // 3. Era Philosophy Interactive Switcher (Abad Pertengahan vs Masa Revolusi vs Sintesis)
+        const eraData = {
+            medieval: {
+                badge: 'Pilar I • Fondasi Karakter Klasik',
+                title: 'Abad Pertengahan: Kode Kehormatan, Ketangguhan & Persaudaraan Ksatria',
+                desc: 'Abad Pertengahan (Medieval Era) di dalam AIRFEST tidak diambil sisi kelamnya, melainkan puncak nilai Chivalry (Keksatriaan) dan kemegahan arsitektur kerajaannya. Era ini mengajarkan bahwa sebelum seseorang mengubah dunia, ia harus mampu menempa dirinya sendiri dengan disiplin, integritas, dan kesetiaan pada tim (Guild).',
+                points: [
+                    { icon: 'fa-shield-halved', label: 'Chivalry & Sportivitas', text: 'Menjunjung tinggi adab berkompetisi, menghormati lawan, dan bertanding secara terhormat.' },
+                    { icon: 'fa-fort-awesome', label: 'Ketangguhan Mental (Fortitude)', text: 'Bagaikan zirah baja dan perisai emas ksatria, peserta ditempa agar tidak mudah menyerah menghadapi rintangan.' },
+                    { icon: 'fa-users-rays', label: 'Solidaritas Serikat (Guilds)', text: 'Membangun ikatan persaudaraan yang kuat antar peserta, panitia, dan komunitas.' }
+                ],
+                quote: '"Seorang ksatria sejati dikenal bukan hanya dari tajamnya pedang yang ia genggam, melainkan dari teguhnya perisai kehormatan yang ia jaga."'
+            },
+            revolution: {
+                badge: 'Pilar II • Energi Pembaruan & Terobosan',
+                title: 'Masa Revolusi: Kebangkitan Nalar, Inovasi & Keberanian Mendobrak Batas',
+                desc: 'Masa Revolusi (Age of Revolution & Renaissance) adalah era ketika manusia berani mempertanyakan kemapanan lama, menyalakan obor ilmu pengetahuan, seni, dan teknologi baru. Di dalam AIRFEST, elemen ini diwakili oleh jambul api merah-oranye yang berkobar di atas kepala sang Ksatria.',
+                points: [
+                    { icon: 'fa-fire-flame-curved', label: 'Api Kreativitas Tanpa Batas', text: 'Mendorong generasi muda untuk melahirkan ide, karya seni, dan solusi yang segar serta orisinal.' },
+                    { icon: 'fa-gears', label: 'Transformasi & Progresivitas', text: 'Mengubah pola pikir pasif menjadi penggerak perubahan (agent of change) di lingkungan sekolah maupun masyarakat.' },
+                    { icon: 'fa-bolt', label: 'Keberanian Bersuara', text: 'Berani menyampaikan gagasan kritis secara terstruktur melalui debat, karya ilmiah, dan ekspresi panggung.' }
+                ],
+                quote: '"Revolusi besar selalu dimulai dari satu percikan api keberanian untuk berpikir berbeda dan melangkah lebih maju."'
+            },
+            synthesis: {
+                badge: 'Pilar III • Identitas Unik AIRFEST',
+                title: 'Sintesis Harmoni: Ketika Perisai Ksatria Bertemu dengan Api Revolusi',
+                desc: 'Mengapa penggabungan kedua era ini menjadi mahakarya konsep bagi AIRFEST? Karena generasi muda saat ini membutuhkan KEDUANYA: mereka butuh akar moral dan ketangguhan mental ala Ksatria Abad Pertengahan, sekaligus sayap inovasi dan keberanian ala Masa Revolusi.',
+                points: [
+                    { icon: 'fa-gem', label: 'Tercermin Langsung pada Logo & Maskot', text: 'Perisai emas & zirah mewakili Abad Pertengahan; jambul api & geometri heksagon modern mewakili Masa Revolusi.' },
+                    { icon: 'fa-masks-theater', label: 'Atmosfer Acara yang Kontras & Megah', text: 'Perpaduan dekorasi kastil klasik dengan tata cahaya (lighting) panggung modern yang dinamis.' },
+                    { icon: 'fa-trophy', label: 'Pesan Moral yang Utuh', text: 'Melahirkan juara yang tidak hanya cerdas dan inovatif, tetapi juga beretika dan berjiwa ksatria.' }
+                ],
+                quote: '"Berakar kuat pada kehormatan masa lalu, berkobar berani menciptakan masa depan — itulah jiwa AIRFEST."'
+            }
+        };
+
+        function switchEra(key) {
+            const data = eraData[key];
+            const container = document.getElementById('eraInnerContent');
+
+            // Update button active styles
+            ['medieval', 'revolution', 'synthesis'].forEach(k => {
+                const btn = document.getElementById('btn-era-' + k);
+                if (k === key) {
+                    btn.className = 'era-tab-btn px-6 py-3.5 rounded-2xl font-medieval font-bold text-sm uppercase tracking-wider transition-all bg-gold text-obsidian shadow-lg shadow-gold/25';
+                } else {
+                    btn.className = 'era-tab-btn px-6 py-3.5 rounded-2xl font-medieval font-bold text-sm uppercase tracking-wider transition-all bg-obsidian/90 text-parchment border border-taupe/30 hover:border-gold';
+                }
+            });
+
+            container.innerHTML = `
+                <div class="lg:col-span-7 space-y-5">
+                    <span class="px-3.5 py-1.5 rounded-full bg-bronze/30 border border-gold/40 text-gold text-xs font-semibold uppercase tracking-wider inline-block">
+                        ${data.badge}
+                    </span>
+                    <h3 class="font-medieval text-2xl sm:text-3xl font-bold text-parchment leading-snug">
+                        ${data.title}
+                    </h3>
+                    <p class="text-parchment/80 text-sm sm:text-base leading-relaxed">
+                        ${data.desc}
+                    </p>
+                    <div class="p-4 rounded-2xl bg-obsidian/80 border-l-4 border-flame italic text-xs sm:text-sm text-gold">
+                        ${data.quote}
+                    </div>
+                </div>
+                <div class="lg:col-span-5 space-y-4">
+                    ${data.points.map(p => `
+                        <div class="p-4 rounded-2xl bg-obsidian/90 border border-taupe/25 flex items-start gap-4 hover:border-gold/50 transition-colors">
+                            <div class="w-10 h-10 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold shrink-0 mt-0.5">
+                                <i class="fa-solid ${p.icon}"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medieval font-bold text-sm text-parchment">${p.label}</h4>
+                                <p class="text-xs text-parchment/70 mt-1 leading-relaxed">${p.text}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // 4. Interactive Quest Stepper Logic
+        const questSteps = [
+            {
+                rank: 'Tahap 1: Novice Squire (Penyambutan)',
+                title: 'Quest 01 — Melewati Gerbang Kastil (The Citadel Gate) & Registrasi Serikat',
+                desc: 'Saat pengunjung atau peserta tiba di lokasi AIRFEST, mereka disambut oleh instalasi Gerbang Kastil berornamen logo berlian AIRFEST. Di meja registrasi, peserta menerima "Knight Passport" (kartu misi fisik/digital) dan memilih atribut Guild mereka.',
+                deliverables: ['Dekorasi Gerbang Kastil & Panji Kerajaan', 'Pembagian Kartu Quest / Gelang Tiket Tematik', 'Wall of Honor (Instalasi Foto & Tanda Tangan Deklarasi Revolusi)']
+            },
+            {
+                rank: 'Tahap 2: Vanguard Knight (Kompetisi)',
+                title: 'Quest 02 — Pertarungan di Arena Valor & Sidang Revolusi',
+                desc: 'Peserta berlaga di cabang perlombaan masing-masing (Olahraga, E-Sport, Akademik, atau Seni). Penonton yang hadir memberikan dukungan dan menyelesaikan tantangan mini di tiap zona untuk mendapatkan stempel Berlian Perunggu.',
+                deliverables: ['Atmosfer Lomba dengan Kosakata Ksatria & Revolusi', 'Stempel Quest untuk Penonton Aktif', 'Live Leaderboard Bertema Peta Kerajaan']
+            },
+            {
+                rank: 'Tahap 3: Master Innovator (Eksplorasi)',
+                title: 'Quest 03 — Menjelajahi Bazaar of the Realm & Pameran Karya',
+                desc: 'Di sela-sela perlombaan, pengunjung memadati area bazar kuliner (Royal Tavern), mengunjungi pameran karya inovasi/seni, serta berbelanja merchandise eksklusif bergambar Maskot Ksatria dan Logo Berlian AIRFEST.',
+                deliverables: ['Booth Kuliner & Sponsor Bernuansa Medieval Market', 'Penukaran Stempel Quest dengan Merchandise/Doorprize', 'Spot Photobooth bersama Maskot Ksatria AIRFEST']
+            },
+            {
+                rank: 'Tahap 4: Grand Champion (Puncak Revolusi)',
+                title: 'Quest 04 — Malam Penobatan (Coronation Night) & Konser Renaissance',
+                desc: 'Seluruh ksatria dan pengunjung berkumpul di panggung utama. Acara dibuka dengan teatrikal penyalaan Obor Revolusi, dilanjutkan dengan penganugerahan piala/medali berlian AIRFEST kepada para pemenang, dan ditutup dengan pertunjukan musik spektakuler.',
+                deliverables: ['Seremoni Penobatan Juara Umum (Grand Trophy of AIRFEST)', 'Pertunjukan Musik, Cahaya & Efek Visual Bara Api', 'Penutupan Megah yang Meninggalkan Kesan Tak Terlupakan']
+            }
+        ];
+
+        function selectQuestStep(index) {
+            const step = questSteps[index];
+            document.getElementById('questRankTitle').textContent = step.rank;
+
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById('qstep-' + i);
+                if (i === index) {
+                    btn.className = 'quest-step-btn p-4 rounded-2xl border text-left transition-all bg-gold/15 border-gold text-parchment shadow-lg';
+                } else {
+                    btn.className = 'quest-step-btn p-4 rounded-2xl border text-left transition-all bg-obsidian/70 border-taupe/25 text-parchment/70 hover:border-gold/50';
+                }
+            }
+
+            document.getElementById('questStepDetail').innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-7 space-y-3">
+                        <h4 class="font-medieval text-xl font-bold text-gold">${step.title}</h4>
+                        <p class="text-sm text-parchment/80 leading-relaxed">${step.desc}</p>
+                    </div>
+                    <div class="lg:col-span-5 bg-charcoal p-5 rounded-xl border border-gold/25">
+                        <div class="text-xs font-semibold uppercase tracking-wider text-flame mb-3">
+                            <i class="fa-solid fa-list-check mr-1.5"></i>Elemen Eksekusi di Lapangan:
+                        </div>
+                        <ul class="space-y-2 text-xs text-parchment/85">
+                            ${step.deliverables.map(item => `
+                                <li class="flex items-center gap-2">
+                                    <i class="fa-solid fa-diamond text-[8px] text-gold"></i>
+                                    <span>${item}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 5. Interactive Logo Theme Switcher
+        function setLogoTheme(mode) {
+            const container = document.getElementById('logoPreviewContainer');
+            const logoUse = document.getElementById('interactiveLogoUse');
+            const label = document.getElementById('logoPresetName');
+
+            if (mode === 'original') {
+                container.className = 'my-8 w-48 h-56 rounded-2xl bg-obsidian border border-gold/30 flex items-center justify-center p-6 shadow-inner transition-colors duration-500';
+                logoUse.style.setProperty('--logo-left', '#9A8675');
+                logoUse.style.setProperty('--logo-right', '#66462C');
+                logoUse.style.setProperty('--logo-center', '#F5EFE6');
+                label.textContent = 'Versi Asli (Dark Background)';
+            } else if (mode === 'shield') {
+                container.className = 'my-8 w-48 h-56 rounded-2xl bg-gradient-to-br from-[#2A1E12] to-[#0D0C0B] border border-gold flex items-center justify-center p-6 shadow-inner transition-colors duration-500';
+                logoUse.style.setProperty('--logo-left', '#FFF0C2');
+                logoUse.style.setProperty('--logo-right', '#B5892E');
+                logoUse.style.setProperty('--logo-center', '#D4A843');
+                label.textContent = 'Versi Emas Perisai Ksatria';
+            } else if (mode === 'light') {
+                container.className = 'my-8 w-48 h-56 rounded-2xl bg-[#F5EFE6] border border-bronze flex items-center justify-center p-6 shadow-inner transition-colors duration-500';
+                logoUse.style.setProperty('--logo-left', '#9A8675');
+                logoUse.style.setProperty('--logo-right', '#66462C');
+                logoUse.style.setProperty('--logo-center', '#0D0C0B');
+                label.textContent = 'Versi Latar Terang (Surat/Proposal)';
+            }
+        }
+
+        // 6. Clipboard Copy with Custom Toast
+        let toastTimeout;
+        function copyHex(hexCode, colorName) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = hexCode;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const toastBox = document.getElementById('toastBox');
+            document.getElementById('toastTitle').textContent = `${colorName} (${hexCode})`;
+            document.getElementById('toastDesc').textContent = 'Kode warna berhasil disalin ke clipboard Anda!';
+
+            toastBox.classList.remove('translate-y-24', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastBox.classList.add('translate-y-24', 'opacity-0');
+            }, 2800);
+        }
+
+        // 7. Scroll Reveal Observer
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        // 8. Floating Ember & Gold Dust Canvas Animation
+        function initEmberCanvas() {
+            const canvas = document.getElementById('emberCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            class EmberParticle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = height + Math.random() * 100;
+                    this.size = Math.random() * 2.6 + 0.8;
+                    this.speedY = -(Math.random() * 0.65 + 0.2);
+                    this.speedX = (Math.random() - 0.5) * 0.4;
+                    this.alpha = Math.random() * 0.55 + 0.15;
+                    const palette = ['#D4A843', '#F04E23', '#9A8675', '#9E1B24'];
+                    this.color = palette[Math.floor(Math.random() * palette.length)];
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    if (this.y < -20) this.reset();
+                }
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = this.alpha;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            function setup() {
+                resize();
+                const count = Math.min(45, Math.floor(width / 28));
+                particles = Array.from({ length: count }, () => {
+                    const p = new EmberParticle();
+                    p.y = Math.random() * height;
+                    return p;
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', resize);
+            setup();
+            animate();
+        }
+
+        window.onload = function () {
+            switchEra('medieval');
+            selectQuestStep(0);
+            initScrollReveal();
+            initEmberCanvas();
+        };
+    </script>
+</body>
+</html>
